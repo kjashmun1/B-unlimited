@@ -37,6 +37,9 @@ class EditScreen:
 
 		self.reset_button = customtkinter.CTkButton(master=self.edit_frame, height=50, width=200, text="Reset to Original", border_width=2, command=self.reset)
 		self.reset_button.place(relx=0.5, rely=0.53, anchor=tkinter.CENTER)
+  
+		self.toinpaint_button = customtkinter.CTkButton(master=self.edit_frame, height=50, width=200, text="Inpaint on New Image", border_width=2, command=lambda: self.to_inpaint(screen_handler))
+		self.toinpaint_button.place(relx=0.5, rely=0.79, anchor=tkinter.CENTER)
 
 		self.back_button = customtkinter.CTkButton(master=self.edit_frame, height=50, width=200, text="Back to Home", border_width=2, command=lambda: self.back(screen_handler))
 		self.back_button.place(relx=0.5, rely=0.87, anchor=tkinter.CENTER)
@@ -66,6 +69,11 @@ class EditScreen:
 	# resets the selected image to its default when it was first selected
 	def reset(self):
 		print("Reset button has been pressed")
+  
+	# takes the user back to the inpaint screen
+	def to_inpaint(self, screen_handler):
+		print("To inpaint screen button has been pressed")
+		screen_handler.to_inpaint_screen()
 
 	# takes the user back to the home screen
 	def back(self, screen_handler):
