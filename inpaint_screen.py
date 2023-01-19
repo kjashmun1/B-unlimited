@@ -3,7 +3,7 @@ import customtkinter
 from tkinter import filedialog
 
 class InpaintScreen:
-	def __init__(self, parent):
+	def __init__(self, parent, screen_handler):
 		super ().__init__()
 
 		# configure main frame that will hold other frames
@@ -38,13 +38,13 @@ class InpaintScreen:
 		self.newimage_button = customtkinter.CTkButton(master=self.button_frame, height=50, width=200, text="Start New Image", border_width=2, command=self.start_new_image)
 		self.newimage_button.place(relx=0.5, rely=0.63, anchor=tkinter.CENTER)
 
-		self.back_button = customtkinter.CTkButton(master=self.button_frame, height=50, width=200, text="Back to Home", border_width=2, command=self.back)
+		self.back_button = customtkinter.CTkButton(master=self.button_frame, height=50, width=200, text="Back to Home", border_width=2, command=lambda: self.back(screen_handler))
 		self.back_button.place(relx=0.5, rely=0.71, anchor=tkinter.CENTER)
 		
 		self.saveas_button = customtkinter.CTkButton(master=self.button_frame, height=50, width=200, text="Save Image As", border_width=2, command=self.save_as)
 		self.saveas_button.place(relx=0.5, rely=0.79, anchor=tkinter.CENTER)
 
-		self.edit_button = customtkinter.CTkButton(master=self.button_frame, height=50, width=200, text="Edit Image", border_width=2, command=self.edit)
+		self.edit_button = customtkinter.CTkButton(master=self.button_frame, height=50, width=200, text="Edit Image", border_width=2, command=lambda: self.edit(screen_handler))
 		self.edit_button.place(relx=0.5, rely=0.87, anchor=tkinter.CENTER)
 
 		self.finished_button = customtkinter.CTkButton(master=self.button_frame, height=50, width=200, text="Finished", border_width=2, command=self.finished)
@@ -79,8 +79,9 @@ class InpaintScreen:
 		print("Start new image button has been pressed")
 
 	# method will take user back to the previous screen (home screen)
-	def back(self):
+	def back(self, screen_handler):
 		print("Back button has been pressed")
+		screen_handler.to_home_screen()
 
 	# method will reset the image back to its original form when user selected it
 	def reset(self):
@@ -101,5 +102,6 @@ class InpaintScreen:
 		print("Save As button has been pressed")
 
 	# method will only allow user to hit edit button if finished button is pressed and will allow user to go to the edit screen
-	def edit(self):
+	def edit(self, screen_handler):
 		print("Edit button has been pressed")
+		screen_handler.to_edit_screen()

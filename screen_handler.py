@@ -22,7 +22,7 @@ class ScreenHandler:
 		self.create_home_screen()
 
 	def create_home_screen(self):
-		self.home_screen = HomeScreen(self.root)
+		self.home_screen = HomeScreen(self.root, self)
 		self.current_screen = "home"
 
 	def to_home_screen(self):
@@ -32,7 +32,7 @@ class ScreenHandler:
 			self.inpaint_screen.main_frame.destroy()
 		if self.current_screen == "home":
 			return
-		self.home_screen = HomeScreen(self.root)
+		self.home_screen = HomeScreen(self.root, self)
 		self.current_screen = "home"	
 
 	def to_inpaint_screen(self):
@@ -42,7 +42,7 @@ class ScreenHandler:
 			return
 		if self.current_screen == "home":
 			self.home_screen.main_frame.destroy()
-		self.inpaint_screen = InpaintScreen(self.root)
+		self.inpaint_screen = InpaintScreen(self.root, self)
 		self.current_screen = "inpaint"
 
 	def to_edit_screen(self):
@@ -52,5 +52,5 @@ class ScreenHandler:
 			self.inpaint_screen.main_frame.destroy()
 		if self.current_screen == "home":
 			self.home_screen.main_frame.destroy()
-		self.edit_screen = EditScreen(self.root)
+		self.edit_screen = EditScreen(self.root, self)
 		self.current_screen = "edit"

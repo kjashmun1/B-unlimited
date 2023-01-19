@@ -5,7 +5,7 @@ customtkinter.set_appearance_mode("Dark")
 customtkinter.set_default_color_theme("dark-blue")
 
 class EditScreen:
-	def __init__(self, parent):
+	def __init__(self, parent, screen_handler):
 		super ().__init__()
 
 		# configure the main frame to hold other frames
@@ -38,7 +38,7 @@ class EditScreen:
 		self.reset_button = customtkinter.CTkButton(master=self.edit_frame, height=50, width=200, text="Reset to Original", border_width=2, command=self.reset)
 		self.reset_button.place(relx=0.5, rely=0.53, anchor=tkinter.CENTER)
 
-		self.back_button = customtkinter.CTkButton(master=self.edit_frame, height=50, width=200, text="Back to Home", border_width=2, command=self.back)
+		self.back_button = customtkinter.CTkButton(master=self.edit_frame, height=50, width=200, text="Back to Home", border_width=2, command=lambda: self.back(screen_handler))
 		self.back_button.place(relx=0.5, rely=0.87, anchor=tkinter.CENTER)
 
 		self.saveas_button = customtkinter.CTkButton(master=self.edit_frame, height=50, width=200, text="Save Image As", border_width=2, command=self.save_as)
@@ -68,8 +68,9 @@ class EditScreen:
 		print("Reset button has been pressed")
 
 	# takes the user back to the home screen
-	def back(self):
+	def back(self, screen_handler):
 		print("Back button has been pressed")
+		screen_handler.to_home_screen()
 
 	# prompts the user to save the newly edited image to their computer
 	def save_as(self):
