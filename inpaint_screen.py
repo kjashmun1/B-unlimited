@@ -21,13 +21,17 @@ class InpaintScreen:
 		# configure the buttons in the button frame 
 		self.inpaint_button = customtkinter.CTkButton(master=self.button_frame, height=50, width=200, text="Inapint/Erase", border_width=2, command=self.inpaint)
 		self.inpaint_button.place(relx=0.5, rely=0.05, anchor=tkinter.CENTER) 
-		self.inpaint_slider = customtkinter.CTkSlider(master=self.button_frame, from_=1, to=100, number_of_steps=100, command=self.inpaint_brush_size)
+		self.inpaint_slider = customtkinter.CTkSlider(master=self.button_frame, from_=1, to=100, number_of_steps=99, command=self.inpaint_brush_size)
 		self.inpaint_slider.place(relx=0.5, rely=0.1, anchor=tkinter.CENTER)
+		self.inpaint_slider_text = customtkinter.CTkLabel(master=self.button_frame, height=10, width=20, font=("Segoe UI", 8), text=int(self.inpaint_slider.get()))
+		self.inpaint_slider_text.place(relx=0.89, rely=0.092)
 
 		self.zoom_button = customtkinter.CTkButton(master=self.button_frame, height=50, width=200, text="Zoom In/Zoom Out", border_width=2, command=self.zoom)
 		self.zoom_button.place(relx=0.5, rely=0.17, anchor=tkinter.CENTER)
 		self.zoom_slider = customtkinter.CTkSlider(master=self.button_frame, from_=25, to=400, number_of_steps=75, command=self.zoom_slider)
 		self.zoom_slider.place(relx=0.5, rely=0.22, anchor=tkinter.CENTER)
+		self.zoom_slider_text = customtkinter.CTkLabel(master=self.button_frame, height=10, width=20, font=("Segoe UI", 8), text=int(self.zoom_slider.get()))
+		self.zoom_slider_text.place(relx=0.89, rely=0.212)
 
 		self.undo_button = customtkinter.CTkButton(master=self.button_frame, height=50, width=200, text="Undo Last Change", border_width=2, command=self.undo)
 		self.undo_button.place(relx=0.5, rely=0.29, anchor=tkinter.CENTER)
@@ -61,6 +65,7 @@ class InpaintScreen:
 	# method will handle the changing of teh brush size from the slider
 	def inpaint_brush_size(self, value):
 		print(f"Current brush size: {value}")
+		self.inpaint_slider_text.configure(text=int(value))
 
 	# method will enable the zoom slider
 	def zoom(self):
@@ -69,6 +74,7 @@ class InpaintScreen:
 	# method will handle the changing of the zoom factor from the sldier
 	def zoom_slider(self, value):
 		print(f"Current zoom value: {value}")
+		self.zoom_slider_text.configure(text=int(value))
 
 	# method will undo last thing the user did to the image 
 	def undo(self):

@@ -1,5 +1,6 @@
 import tkinter
 import customtkinter
+from tkinter import filedialog
 
 customtkinter.set_appearance_mode("Dark")
 customtkinter.set_default_color_theme("dark-blue")
@@ -31,6 +32,8 @@ class EditScreen:
 		self.zoom_button.place(relx=0.5, rely=0.29, anchor=tkinter.CENTER)
 		self.zoom_slider = customtkinter.CTkSlider(master=self.edit_frame, from_=25, to=400, number_of_steps=75, command=self.zoom_slider)
 		self.zoom_slider.place(relx=0.5, rely=0.34, anchor=tkinter.CENTER)
+		self.zoom_slider_text = customtkinter.CTkLabel(master=self.edit_frame, height=10, width=20, font=("Segoe UI", 8), text=int(self.zoom_slider.get()))
+		self.zoom_slider_text.place(relx=0.89, rely=0.332)
 
 		self.undo_button = customtkinter.CTkButton(master=self.edit_frame, height=50, width=200, text="Undo Last Change", border_width=2, command=self.undo)
 		self.undo_button.place(relx=0.5, rely=0.41, anchor=tkinter.CENTER)
@@ -54,6 +57,9 @@ class EditScreen:
 	# method will allow the user to choose an image file that is a design to add onto the clothing
 	def design_select(self):
 		print("Design selection button has been pressed")
+		filepath = filedialog.askopenfilename(title="Choose the image file you wish to inpaint on.")
+		filepath = filepath.split("/")
+		self.design_button.configure(text=filepath[-1])
 
 	# method will handle the zooming in and out of the selected image to edit
 	def zoom(self):
@@ -61,6 +67,7 @@ class EditScreen:
 
 	def zoom_slider(self, value):
 		print(f"Zoom slider has been adjusted, new value: {value}")
+		self.zoom_slider_text.configure(text=int(value))
 
 	# un does the last change the user made to the image
 	def undo(self):
