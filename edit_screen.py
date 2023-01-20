@@ -2,24 +2,21 @@ import tkinter
 import customtkinter
 from tkinter import filedialog
 
-customtkinter.set_appearance_mode("Dark")
-customtkinter.set_default_color_theme("dark-blue")
-
 class EditScreen:
 	def __init__(self, parent, screen_handler):
 		super ().__init__()
 
 		# configure the main frame to hold other frames
 		self.main_frame = customtkinter.CTkFrame(master=parent, width=1280, height=720)
-		self.main_frame.pack(padx=8, pady=8, fill="both", expand=True)
+		self.main_frame.pack(fill="both", expand=True)
 
 		# configure frame on right side for edit buttons
 		self.edit_frame = customtkinter.CTkFrame(master=self.main_frame, width=240, height=704)
-		self.edit_frame.pack(padx=8, pady=8, side="right", fill="both", expand=True)
+		self.edit_frame.pack(padx=8, pady=8, side="right")
 
 		# configure frame on left side for displaying/handling image
-		self.image_frame = customtkinter.CTkFrame(master=self.main_frame, width=960, height=704)
-		self.image_frame.pack(padx=8, pady=8, side="left", fill ="both", expand=True)
+		self.image_frame = customtkinter.CTkFrame(master=self.main_frame, width=1008, height=704)
+		self.image_frame.pack(padx=8, pady=8, side="left")
 	
 		# configure edit buttons that will be in the edit button frame
 		self.colorselect_optionmenu = customtkinter.CTkOptionMenu(master=self.edit_frame, height=50, width=200, values=["Default", "other"], anchor=tkinter.CENTER, command = self.color_select)
@@ -57,7 +54,7 @@ class EditScreen:
 	# method will allow the user to choose an image file that is a design to add onto the clothing
 	def design_select(self):
 		print("Design selection button has been pressed")
-		filepath = filedialog.askopenfilename(title="Choose the image file you wish to inpaint on.")
+		filepath = filedialog.askopenfilename(title="Choose the design file you wish to add to image.", filetypes=(("PNG Files", "*.png"), ("JPG Files", "*.jpg"), ("JPEG Files", "*.jpeg")))
 		filepath = filepath.split("/")
 		self.design_button.configure(text=filepath[-1])
 

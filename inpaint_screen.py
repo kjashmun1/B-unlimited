@@ -12,11 +12,11 @@ class InpaintScreen:
 
 		# configure frame on right side for buttons
 		self.button_frame = customtkinter.CTkFrame(master=self.main_frame, width=240, height=704)
-		self.button_frame.pack(padx=8, pady=8, side="right", fill="both", expand=True)
+		self.button_frame.pack(padx=8, pady=8, side="right")
 		
 		# configure frame for image display/image choosing
-		self.image_frame = customtkinter.CTkFrame(master=self.main_frame, width=960, height=704)
-		self.image_frame.pack(padx=8, pady=8, side="left", fill="both", expand=True)
+		self.image_frame = customtkinter.CTkFrame(master=self.main_frame, width=1008, height=704)
+		self.image_frame.pack(padx=8, pady=8, side="left")
 
 		# configure the buttons in the button frame 
 		self.inpaint_button = customtkinter.CTkButton(master=self.button_frame, height=50, width=200, text="Inapint/Erase", border_width=2, command=self.inpaint)
@@ -100,7 +100,7 @@ class InpaintScreen:
 	# method will open up file explorer for user to choose image they want to inpaint on
 	def image_selection(self):
 		print("Image selection button has been pressed")
-		filepath = filedialog.askopenfilename(title="Choose the image file you wish to inpaint on.")
+		filepath = filedialog.askopenfilename(title="Choose the image file you wish to inpaint on.", filetypes=(("PNG Files", "*.png"), ("JPG Files", "*.jpg"), ("JPEG Files", "*.jpeg")))
 		print(filepath)
 
 	# method will only allow user to hit save as button if finished button has been pressed and will allow user to save image to chosen file
